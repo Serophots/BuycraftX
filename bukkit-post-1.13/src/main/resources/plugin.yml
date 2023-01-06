@@ -1,7 +1,10 @@
-name: BuycraftX
+name: BlurCraftStore
+description: A modified version of BuycraftX plugin to work better with Geyser. Expects geyser prefix 'BR-', users should use 'BR_' on the store. This will handle the conversion
 main: net.buycraft.plugin.bukkit.BuycraftPlugin
 version: ${project.version}
-author: Buycraft
+authors:
+  - Buycraft
+  - Serophots
 api-version: "1.13"
 commands:
   tebex:

@@ -4,7 +4,7 @@ import java.util.Objects;
 
 public final class QueuedPlayer {
     private final int id;
-    private final String name;
+    private String name;
     private final String uuid;
 
     public QueuedPlayer(final int id, final String name, final String uuid) {
@@ -19,6 +19,10 @@ public final class QueuedPlayer {
 
     public String getName() {
         return this.name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
     }
 
     public String getUuid() {

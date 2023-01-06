@@ -2,6 +2,8 @@ package net.buycraft.plugin.bukkit;
 
 import net.buycraft.plugin.data.QueuedPlayer;
 import net.buycraft.plugin.data.ServerEvent;
+import org.bukkit.Bukkit;
+import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.EventPriority;
 import org.bukkit.event.Listener;
@@ -10,6 +12,8 @@ import org.bukkit.event.player.PlayerJoinEvent;
 import org.bukkit.event.player.PlayerQuitEvent;
 
 import java.util.Date;
+
+import static net.buycraft.plugin.ProcessUsernames.ProcessBedrockUsername;
 
 public class BuycraftListener implements Listener {
     private final BuycraftPluginBase plugin;
@@ -34,6 +38,14 @@ public class BuycraftListener implements Listener {
 
         QueuedPlayer qp = plugin.getDuePlayerFetcher().fetchAndRemoveDuePlayer(event.getPlayer().getName());
         if (qp != null) {
+            //Update qp.name to match that of an online player
+            for(Player player : Bukkit.getOnlinePlayers()) {
+                if(ProcessBedrockUsername(qp.getName()).equalsIgnoreCase(player.getName())) {
+                    qp.setName(player.getName());
+                    break;
+                }
+            }
+
             plugin.getPlayerJoinCheckTask().queue(qp);
         }
     }

@@ -1,6 +1,7 @@
 package net.buycraft.plugin.execution;
 
 import com.google.common.collect.ImmutableList;
+import jdk.vm.ci.meta.Local;
 import net.buycraft.plugin.IBuycraftPlatform;
 import net.buycraft.plugin.data.QueuedPlayer;
 import net.buycraft.plugin.data.responses.DueQueueInformation;
@@ -12,6 +13,8 @@ import java.util.concurrent.atomic.AtomicBoolean;
 import java.util.concurrent.locks.Lock;
 import java.util.concurrent.locks.ReentrantLock;
 import java.util.logging.Level;
+
+import static net.buycraft.plugin.ProcessUsernames.ProcessBedrockUsername;
 
 public class DuePlayerFetcher implements Runnable {
     private static final int FALLBACK_CHECK_BACK_SECS = 300;
@@ -71,7 +74,7 @@ public class DuePlayerFetcher implements Runnable {
 
                 for (QueuedPlayer player : information.getPlayers()) {
                     // Using Locale.US as servers can sometimes have other locales in use.
-                    allDue.put(player.getName().toLowerCase(Locale.US), player);
+                    allDue.put(ProcessBedrockUsername(player.getName()).toLowerCase(Locale.US), player);
                 }
             } while (information.getMeta().isMore());
 
