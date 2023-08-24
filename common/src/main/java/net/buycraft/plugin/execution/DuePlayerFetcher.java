@@ -68,7 +68,8 @@ public class DuePlayerFetcher implements Runnable {
                     }
                     nextCheck = information.getMeta().getNextCheck();
                 } catch (IOException e) {
-                    platform.log(Level.SEVERE, "Could not fetch due players queue", e);
+//                    platform.log(Level.SEVERE, "Could not fetch due players queue", e);
+                    platform.log(Level.SEVERE, "Could not fetch due players queue");
                     return;
                 }
 
